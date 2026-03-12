@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:datahack_3/models/task_organiser.dart';
 import 'Home.dart';
 
 class TaskDetails extends StatelessWidget {
-  const TaskDetails({super.key});
+  final TaskOrganiser loginUser;
+  const TaskDetails({super.key, required this.loginUser});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,7 @@ class TaskDetails extends StatelessWidget {
               children: <Widget>[
                 IconButton(
                   onPressed: () => Navigator.push(context,
-            MaterialPageRoute(builder: (context)=> Home() ),
+            MaterialPageRoute(builder: (context)=> Home(loginUser: loginUser) ),
           ),
                   icon: Icon(
                     Icons.keyboard_backspace_outlined,

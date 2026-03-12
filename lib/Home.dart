@@ -2,10 +2,13 @@ import 'package:datahack_3/Notification.dart';
 import 'package:datahack_3/Task_Details.dart';
 import 'package:datahack_3/alltasks.dart';
 import 'package:datahack_3/sup_info.dart';
+import 'package:datahack_3/models/task_organiser.dart';
+import 'log_in.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
-  const Home({super.key});
+  final TaskOrganiser loginUser;
+  const Home({super.key, required this.loginUser});
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +25,12 @@ class Home extends StatelessWidget {
                     print("suii");
                   },
                   icon: CircleAvatar(
-                    foregroundImage: AssetImage('assets/Profilepicture.png'),
+                    foregroundImage: AssetImage(loginUser.profileImage !),
                     radius: 25,
                   ),
                 ),
                 Container(
+
                   width: 158.29,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -56,7 +60,7 @@ class Home extends StatelessWidget {
                       ),
                       IconButton(onPressed: () {
                         Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Notification2()),
+                          MaterialPageRoute(builder: (context) => Notification2(loginUser: loginUser)),
                         );
                       }, icon: Icon(
                         Icons.notifications,
@@ -85,8 +89,7 @@ class Home extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'Oussama',
-                        style: TextStyle(
+                        loginUser.name.nom,                        style: TextStyle(
                           color: Colors.blue,
                           fontSize: 28,
                           fontWeight: FontWeight.w600,
@@ -145,7 +148,7 @@ class Home extends StatelessWidget {
                       TextButton(
                         onPressed: () {
                           Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Alltasks()),
+                            MaterialPageRoute(builder: (context) => Alltasks(loginUser: loginUser)),
                           );
                         },
                         child: Text("View All",
@@ -268,7 +271,7 @@ class Home extends StatelessWidget {
               GestureDetector(
                 behavior: HitTestBehavior.opaque,
                 onTap: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context)=> TaskDetails() ),
+                  MaterialPageRoute(builder: (context)=> TaskDetails(loginUser: loginUser) ),
                 )
                 ,child:Container(
                     height: 90,
@@ -336,7 +339,7 @@ class Home extends StatelessWidget {
                       ],
                     ),
                   ),
-              ),
+                 ),
                 ],
               ),
             ),

@@ -1,16 +1,18 @@
 import 'package:datahack_3/Home.dart';
 import 'package:datahack_3/appbarr.dart';
+import 'package:datahack_3/models/task_organiser.dart';
 import 'package:flutter/material.dart';
 
 class Notification2 extends StatelessWidget {
-  const Notification2({super.key});
+  final TaskOrganiser loginUser;
+  const Notification2({super.key, required this.loginUser});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: Appbarr(icon2: Icons.keyboard_backspace_outlined,
         title: "Notifications",
-        destination: Home(),
+        destination: Home(loginUser: loginUser),
         icono: false,),
       body: Container(
         padding: EdgeInsetsGeometry.fromLTRB(17, 45, 23, 0),

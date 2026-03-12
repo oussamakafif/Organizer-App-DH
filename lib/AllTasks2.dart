@@ -1,11 +1,13 @@
 import 'package:datahack_3/Home.dart';
 import 'package:datahack_3/appbarr.dart';
 import 'package:datahack_3/daycolour.dart';
+import 'package:datahack_3/models/task_organiser.dart';
 import 'package:flutter/material.dart';
 import 'Indiv task.dart';
 
 class Alltasks2 extends StatelessWidget {
-  const Alltasks2({super.key});
+  final TaskOrganiser loginUser;
+  const Alltasks2({super.key, required this.loginUser});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +15,7 @@ class Alltasks2 extends StatelessWidget {
       appBar: Appbarr(
         icon2: Icons.filter_alt,
         title: "All Tasks",
-        destination: Home(),
+        destination: Home(loginUser: loginUser),
       ),
       body: Container(
         padding: EdgeInsetsGeometry.fromLTRB(18, 24, 18, 8),

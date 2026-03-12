@@ -64,6 +64,8 @@ flutter:
     - assets/Profilepicture.png
     - assets/Logo - Datahack.png
     - assets/Task Details.png
+    - assets/Issam_Boussebta.png
+    - assets/Benkradidja_Rayane.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
