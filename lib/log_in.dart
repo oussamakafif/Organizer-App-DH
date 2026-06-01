@@ -19,6 +19,7 @@ class _LoginState extends State<Login> {
 
   // Fonction pour vérifier les credentials
   TaskOrganiser? loginUser;
+
   bool _verifyLogin(String email, String password) {
     for (var organiser in sampleOrganisers) {
       if (organiser.email == email && organiser.password == password) {
@@ -46,8 +47,11 @@ class _LoginState extends State<Login> {
       setState(() {
         _errorMessage = null;
       });
-      Navigator.push(context,
-        MaterialPageRoute(builder: (context) => NavigationHost(loginUser: loginUser!)),
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => NavigationHost(loginUser: loginUser!),
+        ),
       );
     } else {
       // Login échoué - afficher le message d'erreur
@@ -89,18 +93,11 @@ class _LoginState extends State<Login> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Image.asset(
-                        'assets/Simple.png',
-                        width: 256,
-                        height: 256,
-                      ),
+                      Image.asset('assets/Simple.png', width: 256, height: 256),
                       SizedBox(height: 36),
                       Text(
                         "Please Log In to your account",
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.black87,
-                        ),
+                        style: TextStyle(fontSize: 20, color: Colors.black87),
                       ),
                       SizedBox(height: 36),
                       // Champ Email
@@ -110,10 +107,7 @@ class _LoginState extends State<Login> {
                           controller: _emailController,
                           autocorrect: true,
                           obscureText: false,
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 16,
-                          ),
+                          style: TextStyle(color: Colors.grey, fontSize: 16),
                           decoration: InputDecoration(
                             prefixIcon: Icon(Icons.email),
                             contentPadding: EdgeInsets.symmetric(
@@ -145,10 +139,7 @@ class _LoginState extends State<Login> {
                           controller: _passwordController,
                           autocorrect: true,
                           obscureText: true,
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 16,
-                          ),
+                          style: TextStyle(color: Colors.grey, fontSize: 16),
                           decoration: InputDecoration(
                             prefixIcon: Icon(Icons.lock),
                             contentPadding: EdgeInsets.symmetric(

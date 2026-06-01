@@ -36,13 +36,19 @@ class _NavigationHostState extends State<NavigationHost> {
         destinations: const [
           NavigationDestination(
             icon: Icon(Icons.home_outlined),
-            selectedIcon: Icon(Icons.home),
+            selectedIcon: Icon(Icons.home
+            ,color: Colors.blue,
+            size: 40,),
+
             label: 'Home',
           ),
           NavigationDestination(
             icon: Icon(Icons.people_outline),
-            selectedIcon: Icon(Icons.people),
+            selectedIcon: Icon(Icons.people,
+            color: Colors.blue,
+            size: 40,),
             label: 'Organizers',
+
           ),
         ],
       ),
