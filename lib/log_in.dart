@@ -1,7 +1,9 @@
+import 'package:datahack_3/organizers.dart';
 import 'package:datahack_3/texfield.dart';
 import 'package:datahack_3/models/task_organiser.dart';
 import 'package:flutter/material.dart';
 import 'Home.dart';
+import 'navigation_host.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -45,7 +47,7 @@ class _LoginState extends State<Login> {
         _errorMessage = null;
       });
       Navigator.push(context,
-        MaterialPageRoute(builder: (context) => Home(loginUser: loginUser!)),
+        MaterialPageRoute(builder: (context) => NavigationHost(loginUser: loginUser!)),
       );
     } else {
       // Login échoué - afficher le message d'erreur
