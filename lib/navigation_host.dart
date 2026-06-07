@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'Home.dart';
 import 'Organizers.dart';
 import 'package:datahack_3/models/task_organiser.dart';
+import 'agenda.dart';
 
 class NavigationHost extends StatefulWidget {
   const NavigationHost({super.key, required this.loginUser});
@@ -20,6 +21,7 @@ class _NavigationHostState extends State<NavigationHost> {
   late final List<Widget> _pages = [
     Home(loginUser: widget.loginUser),
     Organizers(loginUser: widget.loginUser),
+    Agenda(loginUser: widget.loginUser),
   ];
 
   @override
@@ -49,6 +51,13 @@ class _NavigationHostState extends State<NavigationHost> {
             size: 40,),
             label: 'Organizers',
 
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.calendar_month_outlined),
+            selectedIcon: Icon(Icons.calendar_month,
+            color: Colors.blue,
+            size: 40,),
+            label: 'Agenda',
           ),
         ],
       ),
