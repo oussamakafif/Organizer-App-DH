@@ -3,6 +3,7 @@ import 'Home.dart';
 import 'Organizers.dart';
 import 'package:datahack_3/models/task_organiser.dart';
 import 'agenda.dart';
+import 'profile.dart';
 
 class NavigationHost extends StatefulWidget {
   const NavigationHost({super.key, required this.loginUser});
@@ -22,6 +23,7 @@ class _NavigationHostState extends State<NavigationHost> {
     Home(loginUser: widget.loginUser),
     Organizers(loginUser: widget.loginUser),
     Agenda(loginUser: widget.loginUser),
+    Profile(loginUser: widget.loginUser),
   ];
 
   @override
@@ -58,6 +60,13 @@ class _NavigationHostState extends State<NavigationHost> {
             color: Colors.blue,
             size: 40,),
             label: 'Agenda',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.person_outline),
+            selectedIcon: Icon(Icons.person,
+            color: Colors.blue,
+            size: 40,),
+            label: 'Profile',
           ),
         ],
       ),
