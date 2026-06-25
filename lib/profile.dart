@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:datahack_3/Notification.dart';
 import 'models/task_organiser.dart';
+import 'settings.dart';
 
 class Profile extends StatefulWidget {
   Profile({super.key, required this.loginUser});
@@ -87,9 +88,14 @@ class _ProfileState extends State<Profile> {
                             ),
 
                             IconButton(
-                              onPressed: () {
-                                print("dok tewjed");
-                              },
+                              onPressed: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Settings(
+                                    loginUser: widget.loginUser,
+                                  ),
+                                ),
+                              ),
                               icon: Icon(
                                 Icons.settings_outlined,
                                 size: 36,
