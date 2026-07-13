@@ -4,7 +4,8 @@ import 'package:datahack_3/models/task_organiser.dart';
 import 'package:flutter/material.dart';
 import 'Home.dart';
 import 'navigation_host.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 class Login extends StatefulWidget {
   const Login({super.key});
 
@@ -19,46 +20,76 @@ class _LoginState extends State<Login> {
 
   // Fonction pour vérifier les credentials
   TaskOrganiser? loginUser;
+  bool _isLoading = false;
 
-  bool _verifyLogin(String email, String password) {
-    for (var organiser in sampleOrganisers) {
-      if (organiser.email == email && organiser.password == password) {
-        loginUser = organiser;
-        return true;
-      }
-    }
-    return false;
-  }
 
   // Fonction pour gérer le login
-  void _handleLogin() {
+  Future<void> _handleLogin() async {
     String email = _emailController.text.trim();
     String password = _passwordController.text.trim();
 
     if (email.isEmpty || password.isEmpty) {
-      setState(() {
-        _errorMessage = "Veuillez remplir tous les champs";
-      });
+      setState(() => _errorMessage = "Veuillez remplir tous les champs");
       return;
     }
 
-    if (_verifyLogin(email, password)) {
-      // Login réussi - aller à la page Home
-      setState(() {
-        _errorMessage = null;
-      });
-      Navigator.push(
+    setState(() {
+      _isLoading = true;
+      _errorMessage = null;
+    });
+
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      print("Connexion réussie : ${userCredential.user?.email}");
+
+      // Cherche l'organisateur dans sampleOrganisers
+      // Lit le document depuis Firestore
+      DocumentSnapshot doc = await FirebaseFirestore.instance
+          .collection('organisateurs')
+          .doc(userCredential.user!.uid)
+          .get();
+
+// Construit TaskOrganiser depuis les données Firestore
+      Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+
+      TaskOrganiser loginUser = TaskOrganiser(
+        name: Name(
+          nom: data['nom'] ?? '',
+          prenom: data['prenom'] ?? '',
+        ),
+        email: data['email'] ?? '',
+        phoneNumber: data['phoneNumber'] ?? '',
+        role: data['role'] ?? '',
+        password: '',
+        profileImage: data['image'] ?? '',
+      );
+
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => NavigationHost(loginUser: loginUser!),
+          builder: (context) => NavigationHost(loginUser: loginUser),
         ),
       );
-    } else {
-      // Login échoué - afficher le message d'erreur
+    }on FirebaseAuthException catch (e) {
       setState(() {
-        _errorMessage = "Email ou mot de passe incorrect";
+        if (e.code == 'user-not-found') {
+          _errorMessage = "Aucun compte trouvé avec cet email";
+        } else if (e.code == 'wrong-password') {
+          _errorMessage = "Mot de passe incorrect";
+        } else {
+          _errorMessage = "Erreur : ${e.message}";
+        }
       });
+    } finally {
+      setState(() => _isLoading = false);
     }
+
+
+
   }
 
   @override
@@ -184,7 +215,7 @@ class _LoginState extends State<Login> {
                       SizedBox(height: 36),
                       // Bouton Login
                       ElevatedButton(
-                        onPressed: _handleLogin,
+                        onPressed: _isLoading ? null : _handleLogin,
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blue,
                           fixedSize: Size(600, 62),
@@ -192,7 +223,9 @@ class _LoginState extends State<Login> {
                             borderRadius: BorderRadius.circular(50),
                           ),
                         ),
-                        child: Text(
+                        child: _isLoading
+                            ? CircularProgressIndicator(color: Colors.white)
+                            : Text(
                           "Login",
                           style: TextStyle(
                             fontSize: 24,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'models/task_organiser.dart';
 import 'change_password.dart';
 import 'log_in.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 // import 'profile.dart'; // Importé mais pas utilisé ici pour l'instant
 
 class Settings extends StatelessWidget {
@@ -349,7 +350,9 @@ contentPadding: EdgeInsetsGeometry.all(20),
 
                                   ),
                                   child: ElevatedButton(
-                                    onPressed: () {Navigator.push(context,MaterialPageRoute(
+                                    onPressed: () async {
+                                      await FirebaseAuth.instance.signOut();
+                                      Navigator.push(context,MaterialPageRoute(
                                       builder: (context) => const Login(), // Replace with your target class name
                                     ), );},
                                     style: transparentButtonStyle,
