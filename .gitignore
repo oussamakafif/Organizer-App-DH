@@ -162,3 +162,5 @@ app.*.symbols
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 !/dev/ci/**/Gemfile.lock
 93824bcd5c24fc1a572ba136da004e4cdafe065e
+android/app/google-services.json
+lib/firebase_options.dart
