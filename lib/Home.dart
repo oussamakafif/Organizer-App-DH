@@ -13,74 +13,75 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        padding: EdgeInsetsGeometry.fromLTRB(20, 35, 20, 0),
-        child: Column(
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                IconButton(
-                  onPressed: () {
-                    print("suii");
-                  },
-                  icon: CircleAvatar(
-                    foregroundImage: AssetImage(loginUser.profileImage !),
-                    radius: 25,
+      body: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.fromLTRB(20, 35, 20, 0),
+          child: Column(
+            children: <Widget>[
+              // --- BARRE D'ENTÊTE (PROFIL & STATUT) ---
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  IconButton(
+                    onPressed: () {
+                      print("suii");
+                    },
+                    icon: CircleAvatar(
+                      foregroundImage: AssetImage(loginUser.profileImage!),
+                      radius: 25,
+                    ),
                   ),
-                ),
-                Container(
-
-                  width: 158.29,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  Row(
                     children: [
-                      Container(
-                        width: 106,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: <Widget>[
-                            Container(
-                              height: 15.29,
-                              width: 15.29,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.green,
-                              ),
+                      Row(
+                        children: <Widget>[
+                          Container(
+                            height: 15.29,
+                            width: 15.29,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.green,
                             ),
-                            Text(
-                              "Availlable",
-                              style: TextStyle(
-                                fontSize: 17.48,
-                                color: Colors.black,
-                              ),
+                          ),
+                          const SizedBox(width: 5),
+                          const Text(
+                            "Available",
+                            style: TextStyle(
+                              fontSize: 17.48,
+                              color: Colors.black,
                             ),
-                          ],
+                          ),
+                        ],
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Notification2(loginUser: loginUser),
+                            ),
+                          );
+                        },
+                        icon: const Icon(
+                          Icons.notifications,
+                          size: 36,
+                          color: Colors.black87,
                         ),
                       ),
-                      IconButton(onPressed: () {
-                        Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Notification2(loginUser: loginUser)),
-                        );
-                      }, icon: Icon(
-                        Icons.notifications,
-                        size: 36,
-                        color: Colors.black87,
-                      ),)
                     ],
                   ),
-                ),
-              ],
-            ),
-            SizedBox(height: 23.92),
-            Container(
-              child: Column(
+                ],
+              ),
+              const SizedBox(height: 23.92),
+
+              // --- BIENVENUE & CARD BANNER ---
+              Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Row(
                     children: [
-                      Text(
+                      const Text(
                         'Welcome ',
                         style: TextStyle(
                           color: Colors.black,
@@ -89,24 +90,24 @@ class Home extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        loginUser.name.nom,                        style: TextStyle(
+                        loginUser.name.nom,
+                        style: const TextStyle(
                           color: Colors.blue,
                           fontSize: 28,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-
                     ],
-                  ),
-                  SizedBox(height: 24),
+                  ), // L'erreur venait d'ici (la Column n'était pas fermée)
+                  const SizedBox(height: 24),
                   Container(
                     height: 132,
-                    padding: EdgeInsetsGeometry.fromLTRB(20, 20, 20, 20),
-                    decoration: BoxDecoration(
+                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+                    decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(24)),
                       color: Color(0xFF003E7C),
                     ),
-                    child: Row(
+                    child: const Row(
                       children: <Widget>[
                         Image(
                           image: AssetImage('assets/Logo - Datahack.png'),
@@ -129,15 +130,15 @@ class Home extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
-            SizedBox(height: 23),
-            Container(
-              child: Column(
+              const SizedBox(height: 23),
+
+              // --- SECTION MY TASKS ---
+              Column(
                 children: <Widget>[
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Text(
+                      const Text(
                         'My Tasks',
                         style: TextStyle(
                           fontSize: 20,
@@ -147,26 +148,31 @@ class Home extends StatelessWidget {
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Alltasks(loginUser: loginUser)),
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Alltasks(loginUser: loginUser),
+                            ),
                           );
                         },
-                        child: Text("View All",
+                        child: const Text(
+                          "View All",
                           style: TextStyle(
                             color: Colors.blue,
                             fontSize: 14,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
-
                       ),
                     ],
                   ),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
+
+                  // --- CURRENT TASK CARD ---
                   Container(
-                    padding: EdgeInsetsGeometry.fromLTRB(20, 20, 20, 20),
+                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
                     height: 299,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.white,
                       boxShadow: [
                         BoxShadow(
@@ -180,7 +186,7 @@ class Home extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Row(
+                        const Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
@@ -193,7 +199,7 @@ class Home extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Row(
+                        const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
                             Text(
@@ -214,7 +220,7 @@ class Home extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Row(
+                        const Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
                             Icon(
@@ -233,7 +239,7 @@ class Home extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Row(
+                        const Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
                             Text(
@@ -255,7 +261,7 @@ class Home extends StatelessWidget {
                                 SupInfo(name: "Boussebata Issam"),
                               ],
                             ),
-                            SizedBox(height: 8),
+                            const SizedBox(height: 8),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
@@ -267,83 +273,88 @@ class Home extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(height: 10),
-              GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context)=> TaskDetails(loginUser: loginUser) ),
-                )
-                ,child:Container(
-                    height: 90,
-                    width: 500,
-                    decoration: BoxDecoration(
-                      color: Color(0xFFB2E3FF),
-                      borderRadius: BorderRadius.all(Radius.circular(24)),
+                  const SizedBox(height: 10),
+
+                  // --- DETAILED TASK ITEM ---
+                  GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => TaskDetails(loginUser: loginUser),
+                      ),
                     ),
-                    padding: EdgeInsetsGeometry.fromLTRB(17.5, 12, 17.5, 12),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              "Task name",
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w700,
+                    child: Container(
+                      height: 90,
+                      width: double.infinity,
+                      decoration: const BoxDecoration(
+                        color: Color(0xFFB2E3FF),
+                        borderRadius: BorderRadius.all(Radius.circular(24)),
+                      ),
+                      padding: const EdgeInsets.fromLTRB(17.5, 12, 17.5, 12),
+                      child: const Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                "Task name",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w700,
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
-                                Icon(Icons.access_time, size: 20, weight: 100),
-                                SizedBox(width: 3),
-                                Text(
-                                  "11:00 - 12:30",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w700,
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: <Widget>[
+                                  Icon(Icons.access_time, size: 20, weight: 100),
+                                  SizedBox(width: 3),
+                                  Text(
+                                    "11:00 - 12:30",
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w700,
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
-                                Icon(
-                                  Icons.location_on_outlined,
-                                  size: 22,
-                                  weight: 100,
-                                ),
-                                SizedBox(width: 2),
-                                Text(
-                                  "Les nouveaux salles 25",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w700,
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.location_on_outlined,
+                                    size: 22,
+                                    weight: 100,
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
+                                  SizedBox(width: 2),
+                                  Text(
+                                    "Les nouveaux salles 25",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                 ),
                 ],
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

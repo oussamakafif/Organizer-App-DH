@@ -218,7 +218,7 @@ class _LoginState extends State<Login> {
                         onPressed: _isLoading ? null : _handleLogin,
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blue,
-                          fixedSize: Size(600, 62),
+                          minimumSize: Size(double.infinity, 62),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(50),
                           ),

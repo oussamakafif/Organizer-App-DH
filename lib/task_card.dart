@@ -28,7 +28,7 @@ class TaskCard extends StatelessWidget {
             child: Text(
               taskName,
               style: TextStyle(
-                fontSize: 27,
+                fontSize: 16,
                 color: Colors.black,
                 fontWeight: FontWeight.w400,
               ),
@@ -37,7 +37,7 @@ class TaskCard extends StatelessWidget {
           Text(
             timePeriod,
             style: TextStyle(
-              fontSize: 27,
+              fontSize: 16,
               color: Colors.black,
               fontWeight: FontWeight.w400,
             ),

@@ -171,12 +171,11 @@ class _ProfileState extends State<Profile> {
                 children: [
                   Icon(Icons.email_outlined, size: 22, color: Colors.grey),
                   SizedBox(width: 8),
-                  Text(
-                    widget.loginUser.email,
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w700,
+                  Flexible(
+                    child: Text(
+                      widget.loginUser.email,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(fontSize: 16, color: Colors.grey, fontWeight: FontWeight.w700),
                     ),
                   ),
                 ],
@@ -186,12 +185,11 @@ class _ProfileState extends State<Profile> {
                 children: [
                   Icon(Icons.phone_outlined, size: 22, color: Colors.grey),
                   SizedBox(width: 8),
-                  Text(
-                    widget.loginUser.phoneNumber,
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w700,
+                  Flexible(
+                    child: Text(
+                      widget.loginUser.phoneNumber,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(fontSize: 16, color: Colors.grey, fontWeight: FontWeight.w700),
                     ),
                   ),
                 ],

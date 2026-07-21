@@ -13,7 +13,7 @@ class Indivtask extends StatelessWidget {
         children: [
           Container(
       height: 90,
-      width: 500,
+      width: double.infinity,
       decoration: BoxDecoration(
         color: Color(0xFFB2E3FF),
         borderRadius: BorderRadius.all(Radius.circular(24)),
@@ -83,7 +83,7 @@ class Indivtask extends StatelessWidget {
 
             Container(
               height: 90,
-              width: 500,
+              width: double.infinity,
               decoration: BoxDecoration(
                 color: Colors.white.withOpacity(0.43),
                 borderRadius: BorderRadius.all(Radius.circular(24)),

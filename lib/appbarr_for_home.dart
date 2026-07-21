@@ -23,48 +23,43 @@ class AppbarrForHome extends StatelessWidget {
             radius: 25,
           ),
         ),
-        Container(
-          width: 158.29,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Container(
-                width: 106,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    Container(
-                      height: 15.29,
-                      width: 15.29,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.green,
-                      ),
+        Row(
+          children: [
+            Container(
+              child: Row(
+                children: <Widget>[
+                  Container(
+                    height: 15.29,
+                    width: 15.29,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.green,
                     ),
-                    Text(
-                      "Availlable",
-                      style: TextStyle(fontSize: 17.48, color: Colors.black),
-                    ),
-                  ],
-                ),
+                  ),
+                  SizedBox(width: 5),
+                  Text(
+                    "Availlable",
+                    style: TextStyle(fontSize: 17.48, color: Colors.black),
+                  ),
+                ],
               ),
-              IconButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Notification2(loginUser: loginUser),
-                    ),
-                  );
-                },
-                icon: Icon(
-                  Icons.notifications,
-                  size: 36,
-                  color: Colors.black87,
-                ),
+            ),
+            IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Notification2(loginUser: loginUser),
+                  ),
+                );
+              },
+              icon: Icon(
+                Icons.notifications,
+                size: 36,
+                color: Colors.black87,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ],
     );
